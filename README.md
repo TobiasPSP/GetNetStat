@@ -80,6 +80,23 @@ Sort-Object -Property PidName -Unique
 14204 Teams
 ```
 
+If you'd like to get the full paths to the applications maintaining HTTPS connections, run the process IDs through `Get-Process`:
+
+```powershell
+Get-NetStat -RemotePort 443 -TCP | 
+Select-Object -ExpandProperty Pid | 
+Foreach-Object { Get-Process -id $_ } | 
+Select-Object -ExpandProperty Path | 
+Sort-Object -Unique
+```
+
+```
+C:\Program Files (x86)\Google\Chrome\Application\chrome.exe
+C:\Users\tobia\AppData\Local\GitHubDesktop\app-2.6.1\GitHubDesktop.exe
+C:\Users\tobia\AppData\Local\Microsoft\OneDrive\OneDrive.exe
+C:\Users\tobia\AppData\Local\Microsoft\Teams\current\Teams.exe
+```
+
 ### Check Port Availability
 
 This example checks whether PowerShell Remoting port 5983 is actually listening (checking whether local host has PowerShell Remoting enabled):
