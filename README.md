@@ -5,15 +5,15 @@ Home of the cross-plat `Get-NetStat` replacement for the old `netstat.exe` utili
 
 The Windows utility `netstat.exe` is very useful to examine connections and ports but it is text-based and OS-specific.
 
-The cmdlet `Get-NetTCPConnection` applies to TCP only, is not available on .NET Core and has no DNS resolution.
+The `Get-NetTCPConnection` cmdlet applies to TCP only, is not available on .NET Core and has no DNS resolution.
 
 That's why I implemented this **PowerShell** module and `Get-NetStat`: it is based on .NET Core and cross-platform, supports TCP and UDP connections, returns rich objects, and features a very fast multi-threaded DNS resolution.
 
-Use the tab "Discussion" to join a discussion if you find issues or have suggestions.
+Use the "Discussions" tab to join a discussion if you find issues or have suggestions.
 
 ## Requirements
 
-Requires *PowerShell* Version 5.1 or better. Runs on *Windows PowerShell* and *PowerShell 7*. Runs on all OS platforms supported by *PowerShell* (i.e. Windows, Linux, macOS).
+Requires *PowerShell* version 5.1 or better. Runs on *Windows PowerShell* and *PowerShell 7*. Runs on all OS platforms supported by *PowerShell* (i.e. Windows, Linux, macOS).
 
 ## Installation
 
@@ -23,7 +23,7 @@ To install the module, run this:
 Install-Module -Name GetNetStat -Scope CurrentUser
 ```
 
-Once the module is installed, you can use the new command `Get-NetStat`:
+Once the module is installed, you can use the new `Get-NetStat` command:
 
 ### View All Connections
 
@@ -43,9 +43,9 @@ TCP      0.0.0.0               5985 0.0.0.0                  0       Listening  
 TCP      0.0.0.0               7680 0.0.0.0                  0       Listening  9128 svchost
 ```
 
-### Outgoing HTTPS: Connections (to Port 443)
+### Outgoing HTTPS: Connections (to port 443)
 
-Add the parameter *-Resolve* to resolve IP addresses and display host names instead:
+Add the `-Resolve` parameter to resolve IP addresses and display host names instead:
 
 ```powershell
 Get-NetStat -RemotePort 443 -Resolve
@@ -62,7 +62,7 @@ TCP      DELL7390.spe...      49726 52.113.206.137         443     Established 1
 TCP      DELL7390.spe...      49742 40.126.1.145           443        TimeWait     0 Idle
 ```
 
-### List Applications With HTTPS Connections
+### List Applications with HTTPS Connections
 
 ```powershell
 Get-NetStat -RemotePort 443 -TCP | 
@@ -99,7 +99,7 @@ C:\Users\tobia\AppData\Local\Microsoft\Teams\current\Teams.exe
 
 ### Check Port Availability
 
-This example checks whether PowerShell Remoting port 5983 is actually listening (checking whether local host has PowerShell Remoting enabled):
+This example checks whether PowerShell remoting port 5985 is actually listening (checking whether local host has PowerShell remoting enabled):
 
 ```powershell
 (Get-NetStat -LocalPort 5985).State -eq [NetStat+State]::Listening
@@ -150,9 +150,9 @@ TCP      DELL7390.spe...      49726 52.113.206.137         443     Established 1
 
 ## Notes
 
-DNS-Resolution is a particularly expensive and slow task. So if you don't need resolved IP addresses, don't resolve. That's why `Get-NetStat` *by default does not* resolve IP addresses.
+DNS resolution is a particularly expensive and slow task. If you don't need resolved IP addresses, don't resolve. That's why `Get-NetStat` *by default does not* resolve IP addresses.
 
-To resolve IP addresses, add the parameter `-Resolve`.  `Get-NetStat` sports a very fast multi-threaded DNS resolution with up to 80 parallel name resolutions. Even though it is fast, not resolving is faster. So use `-Resolve` wisely.
+To resolve IP addresses, add the `-Resolve` parameter.  `Get-NetStat` sports a very fast multi-threaded DNS resolution with up to 80 parallel name resolutions. Even though it is fast, not resolving is faster. Use `-Resolve` wisely.
 
 To make DNS resolution versatile and reusable, it is performed by a separate cmdlet named `Resolve-HostNameProperty`. You can use this command separately to resolve any IP address in any list of objects.
 
