@@ -17,10 +17,10 @@ GUID = 'f17e4420-a7de-4230-a03c-9d28b08f1d8b'
 Author = 'tobia'
 
 # Company
-CompanyName = 'tobia'
+CompanyName = 'https://powershell.one'
 
 # Copyright
-Copyright = '(c) 2020 tobia. All rights reserved.'
+Copyright = '(c) 2021 Dr. Tobias Weltner. All rights reserved.'
 
 # Module Description
 Description = 'implements a fast alternative to netstat.exe'
