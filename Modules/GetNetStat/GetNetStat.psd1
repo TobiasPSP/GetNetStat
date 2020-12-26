@@ -26,7 +26,7 @@ Copyright = '(c) 2020 tobia. All rights reserved.'
 Description = 'implements a fast alternative to netstat.exe'
 
 # Minimum PowerShell Version Required
-PowerShellVersion = '5.0'
+PowerShellVersion = '5.1'
 
 # Name of Required PowerShell Host
 PowerShellHostName = ''
