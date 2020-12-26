@@ -131,7 +131,9 @@ ForEach-Object { [PSCustomObject]@{IP1 = "192.168.2.$_"; IP2="40.112.72.$_"}} |
     Resolve-HostNameProperty -Property IP1, IP2
 ```
 
+## Participate!
 
+If you have additional useful examples or use-cases, or if you find issues, or if you have ideas, please participate in our [discussions](https://github.com/TobiasPSP/GetNetStat/discussions)!
 
 
 
