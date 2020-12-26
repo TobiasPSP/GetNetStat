@@ -1,9 +1,9 @@
 # GetNetStat
-Home of the cross-plat  Get-NetStat replacement for the old netstat.exe utility on Windows
+Home of the cross-plat `Get-NetStat` replacement for the old netstat.exe utility on Windows
 
 ## Objectives
 
-The Windows utility netstat.exe is very useful to examine connections and ports but it is text-based and OS-specific.
+The Windows utility `netstat.exe` is very useful to examine connections and ports but it is text-based and OS-specific.
 
 The cmdlet `Get-NetTCPConnection` applies to TCP only, is not available on .NET Core and has no DNS resolution.
 
