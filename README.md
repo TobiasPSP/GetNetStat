@@ -62,6 +62,24 @@ TCP      DELL7390.spe...      49726 52.113.206.137         443     Established 1
 TCP      DELL7390.spe...      49742 40.126.1.145           443        TimeWait     0 Idle
 ```
 
+### List Applications With HTTPS Connections
+
+```powershell
+Get-NetStat -RemotePort 443 -TCP | 
+Select-Object -Property Pid, PidName | 
+Where-Object Pid -gt 0 | 
+Sort-Object -Property PidName -Unique
+```
+
+```
+  PID PIDName
+  --- -------
+ 9560 chrome
+12752 OneDrive
+ 5464 svchost
+14204 Teams
+```
+
 ### Check Port Availability
 
 This example checks whether PowerShell Remoting port 5983 is actually listening (checking whether local host has PowerShell Remoting enabled):
