@@ -150,7 +150,9 @@ TCP      DELL7390.spe...      49726 52.113.206.137         443     Established 1
 
 ## Notes
 
-DNS-Resolution is a particularly expensive and slow task. `Get-NetStat` sports a very fast multi-threaded DNS resolution when you specify the parameter `-Resolve`.
+DNS-Resolution is a particularly expensive and slow task. So if you don't need resolved IP addresses, don't resolve. That's why `Get-NetStat` does name resolution only on request.
+
+To resolve IP addresses, specify the parameter `-Resolve`.  `Get-NetStat` sports a very fast multi-threaded DNS resolution with up to 80 parallel name resolutions. Even though it is fast, not resolving is faster. So use `-Resolve` wisely.
 
 To make DNS resolution versatile and reusable, it is performed by a separate cmdlet named `Resolve-HostNameProperty`. You can use this command separately to resolve any IP address in any list of objects.
 
