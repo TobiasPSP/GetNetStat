@@ -166,6 +166,18 @@ ForEach-Object { [PSCustomObject]@{IP1 = "192.168.2.$_"; IP2="40.112.72.$_"}} |
     Resolve-HostNameProperty -Property IP1, IP2
 ```
 
+### Credits
+
+This module and all of its code is MIT-licensed so you can use it freely for whatever you want.
+
+Part of this work is based on C# code that is commonly floating around when you search for TCP and UDP connection polling. In fact, I found similar code in so many instances that I couldn't identify anyone specific to credit for it.
+
+I cleaned up and revised the C# code to make it faster and to make it use enumerations instead of string output, then added multi-threaded DNS resolution and wrapped everything up as a cross-platform *PowerShell* module.
+
+If you find areas of improvements, please participate (below), fork, etc. 
+
+
+
 ## Participate!
 
 If you have additional useful examples or use-cases, or if you find issues, or if you have ideas, please participate in our [discussions](https://github.com/TobiasPSP/GetNetStat/discussions)!
