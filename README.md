@@ -13,9 +13,7 @@ Use the tab "Discussion" to join a discussion if you find issues or have suggest
 
 ## Requirements
 
-Requires *PowerShell* Version 5.1 or better. 
-
-Runs on *Windows PowerShell* and *PowerShell*. Runs on all platforms supported by *PowerShell*.
+Requires *PowerShell* Version 5.1 or better. Runs on *Windows PowerShell* and *PowerShell*. Runs on all platforms supported by *PowerShell*.
 
 ## Installation
 
