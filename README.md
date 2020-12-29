@@ -109,6 +109,28 @@ This example checks whether PowerShell remoting port 5985 is actually listening 
 True
 ```
 
+### Resolve Results From Other Commands
+
+`Resolve-HostNameProperty` is a separate reusable command that uses multi-threading to resolve one or more properties on *any* object.
+
+Here is an example where `Get-NetTcpConnection` returns results. `Resolve-HostNameProperty` takes these results and resolves whatever it finds in the specified property *RemoteAddress* using a maximum of 100 concurrent threads:
+
+```powershell
+Get-NetTCPConnection -RemotePort 443 | Resolve-HostNameProperty -Property RemoteAddress -ThrottleLimit 100
+```
+
+```
+LocalAddress                        LocalPort RemoteAddress                       RemotePort
+------------                        --------- -------------                       ----------
+192.168.2.105                       65168     lb-140-82-121-5-fra.github.com      443
+192.168.2.105                       65158     fra15s29-in-f14.1e100.net           443
+192.168.2.105                       65159     fra15s22-in-f3.1e100.net            443
+192.168.2.105                       64906     lb-140-82-113-26-iad.github.com     443
+192.168.2.105                       65177     51.138.106.75                       443
+192.168.2.105                       65172     52.114.20.18                        443
+192.168.2.105                       65171     52.114.20.18                        443
+```
+
 ### Check Applications
 
 Show connections for specific running applications only, i.e. connections maintained by the **Chrome** browser:
