@@ -62,6 +62,46 @@ TCP      DELL7390.spe...      49726 52.113.206.137         443     Established 1
 TCP      DELL7390.spe...      49742 40.126.1.145           443        TimeWait     0 Idle
 ```
 
+### Include Origin Information
+
+**NEW in version 1.1.0**
+
+Add the `-IncludeOrigin` switch parameter to look up remote ip addresses and include sophisticated owner information.
+
+This example displays all established connections to https: (port 443) and includes resolved IP addresses and origin information along with the program that maintains the connection:
+
+```powershell
+Get-NetStat -RemotePort 443 -State Established -Resolve -IncludeOrigin | Select-Object -Property Origin, RemoteIp, Pid, PidName
+```
+
+The result looks similar to this:
+
+```
+Origin                       RemoteIp                                   PID PIDName
+------                       --------                                   --- -------
+AS8068 Microsoft Corporation 1drv.ms                                   8968 WINWORD
+AS36459 GitHub, Inc.         lb-140-82-112-26-iad.github.com           9684 chrome
+AS36459 GitHub, Inc.         lb-140-82-113-26-iad.github.com           9684 chrome
+AS15169 Google LLC           fra24s02-in-f14.1e100.net                 9684 chrome
+AS14618 Amazon.com, Inc.     ec2-52-72-44-152.compute-1.amazonaws.com  4372 kited
+AS15169 Google LLC           156.247.107.34.bc.googleusercontent.com   4372 kited
+AS8075 Microsoft Corporation 51.103.5.159                              5472 svchost
+AS8075 Microsoft Corporation 52.113.206.46                             5180 Teams
+AS8075 Microsoft Corporation 51.103.5.186                             13632 OneDrive
+AS54113 Fastly               185.199.110.154                           9684 chrome
+AS54113 Fastly               151.101.12.133                            9684 chrome
+AS54113 Fastly               151.101.12.133                            9684 chrome
+AS54113 Fastly               151.101.12.133                            9684 chrome
+AS54113 Fastly               151.101.12.133                            9684 chrome
+AS54113 Fastly               151.101.112.133                           9684 chrome
+AS8075 Microsoft Corporation 51.107.59.180                            18124 pwsh
+AS8075 Microsoft Corporation 52.137.103.96                            11008 svchost
+AS8075 Microsoft Corporation 52.114.133.168                            5180 Teams
+AS8075 Microsoft Corporation 51.138.106.75                             7828 svchost
+AS8068 Microsoft Corporation 52.113.194.132                            5180 Teams
+AS8075 Microsoft Corporation 52.114.74.217                             2748 Teams
+```
+
 ### List Applications with HTTPS Connections
 
 ```powershell
