@@ -12,9 +12,9 @@ That's why I implemented this **PowerShell** module and `Get-NetStat`: it is bas
 Use the "Discussions" tab to join a discussion if you find issues or have suggestions.
 
 ## Cross-Platform Considerations
-As https://twitter.com/awakecoding correctly pointed out, this command is limited to *Windows* due to dependencies to *iphlpapi.dll* which is a native *Windows* library. 
+As [Marc-André Moreau](https://twitter.com/awakecoding) correctly pointed out, this command is limited to *Windows* due to dependencies to *iphlpapi.dll* which is a native *Windows* library. 
 
-If you require a cross-platform solution there currently seems no better way than to wrap the various native commands found on each platform, i.e. https://gist.github.com/awakecoding/14ae283e0018a6e9e77ba23c1f4d26f2.
+If you require a cross-platform solution there currently seems no better way than to wrap the various native commands found on each platform, i.e. [here](https://gist.github.com/awakecoding/14ae283e0018a6e9e77ba23c1f4d26f2).
 
 
 ## Requirements
