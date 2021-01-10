@@ -1,5 +1,5 @@
 # GetNetStat
-Home of the cross-plat `Get-NetStat` replacement for the old `netstat.exe` utility on Windows
+Home of the `Get-NetStat` replacement for the old `netstat.exe` utility on *Windows*.
 
 ## Objectives
 
@@ -7,9 +7,15 @@ The Windows utility `netstat.exe` is very useful to examine connections and port
 
 The `Get-NetTCPConnection` cmdlet applies to TCP only, is not available on .NET Core and has no DNS resolution.
 
-That's why I implemented this **PowerShell** module and `Get-NetStat`: it is based on .NET Core and cross-platform, supports TCP and UDP connections, returns rich objects, and features a very fast multi-threaded DNS resolution.
+That's why I implemented this **PowerShell** module and `Get-NetStat`: it is based on .NET Core, works on *Windows PowerShell* and *PowerShell*, supports TCP and UDP connections, returns rich objects, and features a very fast multi-threaded DNS resolution.
 
 Use the "Discussions" tab to join a discussion if you find issues or have suggestions.
+
+## Cross-Platform Considerations
+As https://twitter.com/awakecoding correctly pointed out, this command is limited to *Windows* due to dependencies to *iphlpapi.dll* which is a native *Windows* library. 
+
+If you require a cross-platform solution there currently seems no better way than to wrap the various native commands found on each platform, i.e. https://gist.github.com/awakecoding/14ae283e0018a6e9e77ba23c1f4d26f2.
+
 
 ## Requirements
 
