@@ -459,9 +459,16 @@ function Get-NetStat
             .PARAMETER Resolve
             Resolve ip addresses to host names
 
+            .PARAMETER IncludeOrigin
+            Reports remote ip address owner information
+
             .EXAMPLE
             Get-NetStat 
             Lists all connections and ports
+
+            .EXAMPLE
+            Get-NetStat -Resolve -IncludeOrigin
+            Lists all connections and ports, resolves IP addresses, and includes owner information for remote ip addresses.
 
             .EXAMPLE
             Get-NetStat -TCP
@@ -525,7 +532,10 @@ function Get-NetStat
         $UDP,
         
         [switch]
-        $Resolve
+        $Resolve,
+        
+        [switch]
+        $IncludeOrigin
     )
     
     # there are TWO sources for information: GetTCP() and GetUDP().
@@ -547,6 +557,25 @@ function Get-NetStat
     Where-Object { (!$PSBoundParameters.ContainsKey('State')) -or ($_.State -eq $State)} |
     Where-Object { (!$PSBoundParameters.ContainsKey('PidName')) -or ($_.PidName -like $PidName)} |
     Where-Object { (!$PSBoundParameters.ContainsKey('ProcessId')) -or ($_.Pid -eq $ProcessId)} |
+    # if -IncludeOrigin is specified, query the origin information by a webservice
+    ForEach-Object {
+      $origin = ''
+      if ($IncludeOrigin)
+      {
+        $_.PSTypeNames.Add('connectionOrigin')
+        $null = $_.PSTypeNames.Remove('Connection')
+        try
+        {
+          $ip = $_.RemoteIp
+          if ([string]::IsNullOrEmpty($ip) -eq $false -and ($ip -ne '0.0.0.0') -and ([System.Net.IPAddress]::IsLoopback($ip) -eq $false))
+          {
+            $info = Invoke-RestMethod -Uri "http://ipinfo.io/$ip/json" -UseBasicParsing -ErrorAction Ignore
+            $origin = $info.org.Trim()
+          }
+        } catch {}
+      } 
+      $_ | Add-Member -MemberType NoteProperty -Name Origin -Value $origin -PassThru
+    } |
     # DNS Resolution is expensive and slow, so it is done only on special request
     # Furthermore, it is NOT included in this function. Rather, to resolve IP addresses,
     # a highly optimized and reusable Resolve-HostNameProperty command  is used:

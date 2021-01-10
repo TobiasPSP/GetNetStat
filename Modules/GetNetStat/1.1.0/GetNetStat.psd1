@@ -6,7 +6,7 @@
 RootModule = 'GetNetStat.psm1'
 
 # Version Number
-ModuleVersion = '1.0'
+ModuleVersion = '1.1.0'
 
 CompatiblePSEditions = @('Desktop', 'Core')
 
@@ -56,7 +56,7 @@ ProcessorArchitecture = ''
 # TypesToProcess = @()
 
 # Format files (.ps1xml) that need to be loaded when this module loads
-FormatsToProcess = @("connection.format.ps1xml")
+FormatsToProcess = @("connection.format.ps1xml","connectionOrigin.format.ps1xml")
 
 # 
 # NestedModules = @()
