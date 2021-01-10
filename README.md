@@ -19,7 +19,7 @@ If you require a cross-platform solution there currently seems no better way tha
 
 ## Requirements
 
-Requires *PowerShell* version 5.1 or better. Runs on *Windows PowerShell* and *PowerShell 7*. Runs on all OS platforms supported by *PowerShell* (i.e. Windows, Linux, macOS).
+Requires *PowerShell* version 5.1 or better. Runs on *Windows PowerShell* and *PowerShell 7*. Runs on *Windows*.
 
 ## Installation
 
