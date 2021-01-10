@@ -220,12 +220,30 @@ To make DNS resolution versatile and reusable, it is performed by a separate cmd
 
 Simply pipe the objects to `Resolve-HostNameProperty`, and specify the names of the properties that need to be resolved.
 
-The following example demonstrates this by creating dummy objects with dummy properties with dummy IP addresses. Next, `Resolve-HostNameProperty` is resolving all IP addresses in all properties specified by using up to 80 parallel threads:
+That's why you can use this with other commands to quickly resolve ip addresses. The following example uses `Get-NetTcpConnection` which does not support ip resolution, and pipes the results to `Resolve-HostNameProperty` asking to resolve the property *RemoteAddress* using 100 parallel threads:
 
 ```powershell
-1..255 | 
-ForEach-Object { [PSCustomObject]@{IP1 = "192.168.2.$_"; IP2="40.112.72.$_"}} |
-    Resolve-HostNameProperty -Property IP1, IP2
+Get-NetTCPConnection | Resolve-HostNameProperty -Property RemoteAddress -ThrottleLimit 100
+```
+
+In version 1.1.0, a new switch parameter `-IncludeOrigin` was added which adds owner information for remote addresses. This functionality uses a free public webservice to look up IP address owner information:
+
+```powershell
+Invoke-RestMethod -Uri 'http://ipinfo.io/51.107.59.180/json'
+```
+
+The webservice returns rich ownership information:
+
+```
+ip       : 51.107.59.180
+city     : Zürich
+region   : Zurich
+country  : CH
+loc      : 47.3667,8.5500
+org      : AS8075 Microsoft Corporation
+postal   : 8001
+timezone : Europe/Zurich
+readme   : https://ipinfo.io/missingauth
 ```
 
 ### Credits
